@@ -6,12 +6,12 @@ local GPT={}; GPT.__index=GPT
 local _work=0
 local function yieldIfNeeded(amount)
  _work=_work+(amount or 1)
- if _work>=400 then
+ if _work>=25 then
   _work=0
   os.sleep(0)
  end
 end
-local function zeros(n) local a={} for i=1,n do a[i]=0 end return a end
+local function zeros(n) local a={} for i=1,n do a[i]=0; yieldIfNeeded() end return a end
 local function rand() return (math.random()*2-1)*0.08 end
 local function mat(r,c) local a={} for i=1,r do a[i]={}; for j=1,c do a[i][j]=rand(); yieldIfNeeded() end end return a end
 local function vec(n) local a={}; for i=1,n do a[i]=rand(); yieldIfNeeded() end return a end
@@ -119,7 +119,7 @@ function GPT:train_text(tokens,epochs,seq_len)
  for ep=1,epochs do
   local total,n=0,0
   for i=1,#tokens-seq_len do
-   local x,y={},{}; yieldIfNeeded() for j=1,seq_len do x[j]=tokens[i+j-1]; y[j]=tokens[i+j]; yieldIfNeeded() end
+   local x,y={},{}; yieldIfNeeded(5) for j=1,seq_len do x[j]=tokens[i+j-1]; y[j]=tokens[i+j]; yieldIfNeeded() end
    total=total+self:train(x,y); n=n+1
   end
   final=total/math.max(n,1)
