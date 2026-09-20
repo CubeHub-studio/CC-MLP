@@ -1,11 +1,12 @@
 -- CC-MLP installer
--- Downloads the complete CC-MLP runtime from GitHub.
+-- Downloads the complete CC-MLP runtime and updater from GitHub.
 
 local base="https://raw.githubusercontent.com/CubeHub-studio/CC-MLP/main/"
 local files={
  "mlp.lua","example.lua","math_example.lua",
  "tokenizer.lua","tinygpt.lua","train_gpt.lua","chat_gpt.lua",
- "GPT_README.md","README.md","LICENSE"
+ "GPT_README.md","README.md","LICENSE",
+ "updater.lua"
 }
 
 print("CC-MLP Installer")
@@ -21,5 +22,7 @@ for i,name in ipairs(files) do
 end
 
 print("CC-MLP installed successfully!")
+print("The updater was installed as 'updater.lua'.")
+print("Run 'updater.lua' anytime to update CC-MLP.")
 print("Run 'example.lua' for the MLP XOR demo.")
 print("Run 'chat_gpt.lua' after training CC-GPT.")
